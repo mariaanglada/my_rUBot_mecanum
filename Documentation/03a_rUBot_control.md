@@ -3,6 +3,7 @@
 The objectives of this chapter are:
 - control in virtual environment 
 - control with real robot
+- cambio maria
 
 We have created different activities in this section:
 - Robot performances
