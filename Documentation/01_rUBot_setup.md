@@ -1,5 +1,7 @@
 # **ROS2 rUBot setup**
 
+# Hola em dic Lucía
+
 The objectives of this section are:
 - Setup the robot project in virtual environment for simulation
 - Setup the robot project for real control
