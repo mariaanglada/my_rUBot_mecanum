@@ -1,4 +1,6 @@
 ## **2. ROS2 my robot model and Bringup**
+**Hola, soy Enric**
+
 The main objective of this section is to review the robot bringup process in virtual environment and within the real robots.
 
 The particular objectives of this section are:
