@@ -123,5 +123,114 @@
       <plugin filename="EntityTree" name="Entity tree"/>
     </gui>
 
+
+    <!-- ===== OUTER BOUNDARY: 4.8 m x 4.8 m, built from wall120cm ===== -->
+    <include>
+      <uri>model://wall120cm</uri>
+      <name>wall_north_1</name>
+      <pose>-1.8 2.4 0.15 0 0 0.0</pose>
+    </include>
+    <include>
+      <uri>model://wall120cm</uri>
+      <name>wall_south_1</name>
+      <pose>-1.8 -2.4 0.15 0 0 0.0</pose>
+    </include>
+    <include>
+      <uri>model://wall120cm</uri>
+      <name>wall_east_1</name>
+      <pose>2.4 -1.8 0.15 0 0 1.5708</pose>
+    </include>
+    <include>
+      <uri>model://wall120cm</uri>
+      <name>wall_west_1</name>
+      <pose>-2.4 -1.8 0.15 0 0 1.5708</pose>
+    </include>
+    <include>
+      <uri>model://wall120cm</uri>
+      <name>wall_north_2</name>
+      <pose>-0.6 2.4 0.15 0 0 0.0</pose>
+    </include>
+    <include>
+      <uri>model://wall120cm</uri>
+      <name>wall_south_2</name>
+      <pose>-0.6 -2.4 0.15 0 0 0.0</pose>
+    </include>
+    <include>
+      <uri>model://wall120cm</uri>
+      <name>wall_east_2</name>
+      <pose>2.4 -0.6 0.15 0 0 1.5708</pose>
+    </include>
+    <include>
+      <uri>model://wall120cm</uri>
+      <name>wall_west_2</name>
+      <pose>-2.4 -0.6 0.15 0 0 1.5708</pose>
+    </include>
+    <include>
+      <uri>model://wall120cm</uri>
+      <name>wall_north_3</name>
+      <pose>0.6 2.4 0.15 0 0 0.0</pose>
+    </include>
+    <include>
+      <uri>model://wall120cm</uri>
+      <name>wall_south_3</name>
+      <pose>0.6 -2.4 0.15 0 0 0.0</pose>
+    </include>
+    <include>
+      <uri>model://wall120cm</uri>
+      <name>wall_east_3</name>
+      <pose>2.4 0.6 0.15 0 0 1.5708</pose>
+    </include>
+    <include>
+      <uri>model://wall120cm</uri>
+      <name>wall_west_3</name>
+      <pose>-2.4 0.6 0.15 0 0 1.5708</pose>
+    </include>
+    <include>
+      <uri>model://wall120cm</uri>
+      <name>wall_north_4</name>
+      <pose>1.8 2.4 0.15 0 0 0.0</pose>
+    </include>
+    <include>
+      <uri>model://wall120cm</uri>
+      <name>wall_south_4</name>
+      <pose>1.8 -2.4 0.15 0 0 0.0</pose>
+    </include>
+    <include>
+      <uri>model://wall120cm</uri>
+      <name>wall_east_4</name>
+      <pose>2.4 1.8 0.15 0 0 1.5708</pose>
+    </include>
+    <include>
+      <uri>model://wall120cm</uri>
+      <name>wall_west_4</name>
+      <pose>-2.4 1.8 0.15 0 0 1.5708</pose>
+    </include>
+
+    <!-- ===== INTERNAL WALL A: vertical, x=-1.2, from y=0 to y=2.4 (creates NW pocket) ===== -->
+    <include>
+      <uri>model://wall120cm</uri>
+      <name>inner_wall_A1</name>
+      <pose>-1.2 0.6 0.15 0 0 1.5708</pose>
+    </include>
+    <include>
+      <uri>model://wall120cm</uri>
+      <name>inner_wall_A2</name>
+      <pose>-1.2 1.8 0.15 0 0 1.5708</pose>
+    </include>
+
+    <!-- ===== INTERNAL WALL B: horizontal, y=-1.2, from x=1.2 to x=2.4 (creates SE bay) ===== -->
+    <include>
+      <uri>model://wall120cm</uri>
+      <name>inner_wall_B1</name>
+      <pose>1.8 -1.2 0.15 0 0 0.0</pose>
+    </include>
+
+    <!-- ===== FREE-STANDING OBSTACLE in the NE area ===== -->
+    <include>
+      <uri>model://wall30cm</uri>
+      <name>obstacle_1</name>
+      <pose>1.0 1.0 0.15 0 0 0.7854</pose>
+    </include>
+
   </world>
 </sdf>
