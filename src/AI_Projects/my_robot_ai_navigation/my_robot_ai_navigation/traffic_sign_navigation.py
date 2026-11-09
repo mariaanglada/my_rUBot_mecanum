@@ -85,11 +85,14 @@ class TrafficSignNavigation(Node):
         sign = self.wait_for_sign()
 
         if sign == 'left':
+            #Go to left point, then to final point
             self.go_to(self.left_waypoint, 'left waypoint')
         elif sign == 'right':
+            #Go to right point, then to final point
             self.go_to(self.right_waypoint, 'right waypoint')
         elif sign == 'stop':
-            self.get_logger().info(f'STOP: waiting {self.stop_duration:.1f} seconds')
+            #wait for a specified duration and then go to final point
+            self.get_logger().info(f'STOP: waiting {self.stop_duration:.15f} seconds')
             time.sleep(self.stop_duration)
         else:
             self.get_logger().warning(f'Unknown sign: {sign}. The robot will stay here.')
