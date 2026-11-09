@@ -1,0 +1,19 @@
+[Unit]
+Description=My Robot rosbridge_websocket (port 9090)
+Requires=my_robot.service
+After=my_robot.service network-online.target
+Wants=network-online.target
+[Service]
+Type=simple
+User=ubuntu
+Group=ubuntu
+WorkingDirectory=/home/ubuntu/my_rUBot_mecanum
+EnvironmentFile=/home/ubuntu/my_rUBot_mecanum/tools/robot_installation/Local_service/robot.env
+ExecStart=/home/ubuntu/my_rUBot_mecanum/tools/robot_installation/Local_service/start_rosbridge.sh
+Restart=on-failure
+RestartSec=3
+NoNewPrivileges=true
+PrivateTmp=true
+PartOf=my_robot.service
+[Install]
+WantedBy=multi-user.target

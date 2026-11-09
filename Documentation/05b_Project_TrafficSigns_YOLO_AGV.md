@@ -60,10 +60,31 @@ Build the perception and AI-navigation packages:
 
 ```bash
 cd ~/my_rUBot_mecanum
+source /opt/ros/humble/setup.bash
+source .venv-yolo/bin/activate
 colcon build --symlink-install \
   --packages-select my_robot_ai_perception my_robot_ai_navigation
 source install/setup.bash
 ```
+
+Activate the same YOLO environment whenever you build or launch
+`my_robot_ai_perception`; it provides Ultralytics while retaining the ROS 2
+packages through `--system-site-packages`.
+
+The deployed model is loaded from
+`src/AI_Projects/my_robot_ai_perception/models/`, not from the tools folder.
+The supplied `yolo11n_cls_g1.pt` is identical to the model used by the
+standalone verification tool. The classifier configuration selects:
+
+| Configuration | Model | Image topic |
+| --- | --- | --- |
+| `traffic_sign_classifier_sw.yaml` | `yolo11n_cls_g1.pt` | `/camera/image_raw` |
+| `traffic_sign_classifier_real.yaml` | `yolo11n_cls_g1.pt` | `/image_raw` |
+
+When deploying a newly validated model, copy it to this package's `models/`
+directory, set its filename in both configuration files as appropriate, then
+rebuild and source the workspace. The ROS 2 classifier publishes the normalized
+result on `/traffic_sign`, which is the topic consumed by navigation.
 
 The new implementation does not remove the previous YOLO nodes or launch
 files. Both versions can be tested during the migration.
@@ -258,10 +279,6 @@ at the same time.
 
 ### 6.1 Start and verify the hardware
 
-```bash
-ros2 launch my_robot_bringup my_robot_bringup_robust_hw.launch.py
-```
-
 Check the essential interfaces:
 
 ```bash
@@ -278,13 +295,9 @@ last command if the camera driver uses a different name.
 ```bash
 ros2 launch my_robot_navigation2 navigation2_robot.launch.py \
   use_sim_time:=false \
-  map_file:=my_map.yaml \
-  params_file:=rubot_real_lidar_ai.yaml
+  map_file:=my_lab_map.yaml \
+  params_file:=rubot_real_lidar_nav.yaml
 ```
-
-`rubot_real_lidar_ai.yaml` is the corresponding hardware configuration. Keep
-`use_sim_time:=false` and verify the real robot localization before starting
-the traffic-sign route.
 
 Place the physical robot at the configured initial pose. Verify its pose and
 costmaps in RViz. Use **2D Pose Estimate** when necessary.

@@ -2,10 +2,10 @@
 import time
 
 import rclpy
-from geometry_msgs.msg import PoseStamped
-from nav2_simple_commander.robot_navigator import BasicNavigator
 from rclpy.node import Node
+from geometry_msgs.msg import PoseStamped
 from std_msgs.msg import String
+from nav2_simple_commander.robot_navigator import BasicNavigator
 from tf_transformations import quaternion_from_euler
 
 
@@ -32,17 +32,14 @@ class TrafficSignNavigation(Node):
         self.detected_sign = None
         self.accept_sign = False
 
+        # TODO 1: Create a String subscriber for /traffic_sign.
         self.sign_subscriber = self.create_subscription(
-            String,
-            '/traffic_sign',
-            self.sign_callback,
-            10,
-        )
+            String, '/traffic_sign', self.sign_callback, 10)
 
     def sign_callback(self, msg):
-        if self.accept_sign and self.detected_sign is None:
+        # TODO 2: While accept_sign is True, store the sign in lower case.
+        if self.accept_sign:
             self.detected_sign = msg.data.strip().lower()
-            self.get_logger().info(f'Traffic sign received: {self.detected_sign}')
 
     def create_pose(self, values):
         x, y, yaw = values
@@ -71,7 +68,8 @@ class TrafficSignNavigation(Node):
         self.accept_sign = True
         self.get_logger().info('Waiting for a traffic sign on /traffic_sign ...')
 
-        while self.detected_sign is None:
+        # TODO 3: Process callbacks until detected_sign is not None.
+        while rclpy.ok() and self.detected_sign is None:
             rclpy.spin_once(self, timeout_sec=0.1)
 
         self.accept_sign = False
@@ -84,22 +82,27 @@ class TrafficSignNavigation(Node):
         self.go_to(self.inspection_pose, 'inspection pose')
         sign = self.wait_for_sign()
 
+        # TODO 4: Implement left, right, stop and unknown-sign behaviour.
         if sign == 'left':
             #Go to left point, then to final point
             self.go_to(self.left_waypoint, 'left waypoint')
+            self.go_to(self.final_pose, 'final pose')
         elif sign == 'right':
             #Go to right point, then to final point
             self.go_to(self.right_waypoint, 'right waypoint')
+            self.go_to(self.final_pose, 'final pose')
         elif sign == 'stop':
+<<<<<<< HEAD
             #wait for a specified duration and then go to final point
             self.get_logger().info(f'STOP: waiting {self.stop_duration:.15f} seconds')
+=======
+            self.get_logger().info(f'Stop sign: waiting {self.stop_duration} s')
+>>>>>>> 2202e3b2c0c7d041ab53872047551c09dc87e76c
             time.sleep(self.stop_duration)
+            self.go_to(self.final_pose, 'final pose')
         else:
-            self.get_logger().warning(f'Unknown sign: {sign}. The robot will stay here.')
-            return
-
-        self.go_to(self.final_pose, 'final pose')
-        self.get_logger().info('Route completed')
+            self.get_logger().info(
+                f'Unknown sign "{sign}": staying at inspection pose')
 
 
 def main(args=None):
