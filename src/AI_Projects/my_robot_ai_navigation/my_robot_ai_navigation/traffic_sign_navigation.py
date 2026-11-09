@@ -92,12 +92,8 @@ class TrafficSignNavigation(Node):
             self.go_to(self.right_waypoint, 'right waypoint')
             self.go_to(self.final_pose, 'final pose')
         elif sign == 'stop':
-<<<<<<< HEAD
-            #wait for a specified duration and then go to final point
-            self.get_logger().info(f'STOP: waiting {self.stop_duration:.15f} seconds')
-=======
-            self.get_logger().info(f'Stop sign: waiting {self.stop_duration} s')
->>>>>>> 2202e3b2c0c7d041ab53872047551c09dc87e76c
+            # Wait for the specified duration, then go to the final pose
+            self.get_logger().info(f'Stop sign: waiting {self.stop_duration:.1f} s')
             time.sleep(self.stop_duration)
             self.go_to(self.final_pose, 'final pose')
         else:
